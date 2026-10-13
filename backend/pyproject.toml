@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kyra-agent"
+version = "0.1.0"
+description = "Local agent foundation for Kyra"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<0.116",
+  "pydantic>=2.10,<2.11",
+  "pymongo>=4.13,<5",
+  "firebase-admin>=6.9,<7",
+  "python-dotenv>=1.0,<2",
+  "uvicorn[standard]>=0.34,<0.35",
+  "winrt-Windows.Foundation>=3.2.1,<4; sys_platform == 'win32'",
+  "winrt-Windows.Media.Control>=3.2.1,<4; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+# Voice capture and recognition stay opt-in: installing the agent alone does
+# not install or activate a microphone/model runtime.
+voice = [
+  "faster-whisper>=1.1,<2",
+  "sounddevice>=0.5,<1",
+]
+vision = [
+  "opencv-python>=4.10,<5",
+  # The current hands processor uses the legacy Solutions API available here.
+  "mediapipe>=0.10.21,<0.10.22",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+cache_dir = "../.pytest_cache"
+filterwarnings = ["ignore::DeprecationWarning:starlette.testclient"]

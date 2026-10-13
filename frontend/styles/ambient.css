@@ -1,0 +1,90 @@
+.kyra-app-shell {
+  position: relative;
+  isolation: isolate;
+  background: var(--canvas);
+}
+
+.kyra-ambient-energy {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  color: var(--cyan);
+  pointer-events: none;
+}
+
+.kyra-ambient-energy__wash {
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(ellipse at 14% 18%, color-mix(in srgb, var(--blue) 10%, transparent), transparent 36%),
+    radial-gradient(ellipse at 84% 72%, color-mix(in srgb, var(--cyan) 8%, transparent), transparent 42%);
+  opacity: 0.6;
+  animation: kyra-atmosphere-drift 32s ease-in-out infinite alternate;
+}
+
+.kyra-ambient-energy__paths {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.kyra-ambient-energy__trace,
+.kyra-ambient-energy__spark {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.kyra-ambient-energy__trace { stroke-width: 1; opacity: 0.1; }
+.kyra-ambient-energy__spark {
+  stroke-width: 1.5;
+  stroke-dasharray: 22 740;
+  stroke-dashoffset: 0;
+  opacity: 0.18;
+  animation: kyra-energy-travel 18s linear infinite;
+}
+
+.kyra-ambient-energy--connecting,
+.kyra-ambient-energy--reconnecting { color: var(--warning); }
+.kyra-ambient-energy--open,
+.kyra-ambient-energy--online,
+.kyra-ambient-energy--idle { color: var(--cyan); }
+.kyra-ambient-energy--listening { color: var(--mint); }
+.kyra-ambient-energy--thinking { color: var(--blue); }
+.kyra-ambient-energy--executing { color: var(--primary-strong); }
+.kyra-ambient-energy--error,
+.kyra-ambient-energy--authentication_error,
+.kyra-ambient-energy--backend_error,
+.kyra-ambient-energy--network_error { color: var(--danger); }
+
+.kyra-ambient-energy--listening .kyra-ambient-energy__spark,
+.kyra-ambient-energy--thinking .kyra-ambient-energy__spark { opacity: 0.3; animation-duration: 12s; }
+.kyra-ambient-energy--executing .kyra-ambient-energy__spark { opacity: 0.42; animation-duration: 7s; }
+.kyra-ambient-energy--error .kyra-ambient-energy__spark,
+.kyra-ambient-energy--authentication_error .kyra-ambient-energy__spark,
+.kyra-ambient-energy--backend_error .kyra-ambient-energy__spark,
+.kyra-ambient-energy--network_error .kyra-ambient-energy__spark { opacity: 0.3; animation-duration: 24s; }
+
+.kyra-ambient-energy--paused * { animation-play-state: paused !important; }
+.kyra-sidebar,
+.kyra-dashboard { position: relative; z-index: 1; }
+
+@keyframes kyra-atmosphere-drift {
+  from { transform: translate3d(-1%, -0.5%, 0) scale(1); }
+  to { transform: translate3d(1%, 0.5%, 0) scale(1.04); }
+}
+
+@keyframes kyra-energy-travel {
+  to { stroke-dashoffset: -762; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kyra-ambient-energy__wash,
+  .kyra-ambient-energy__spark { animation: none; }
+  .kyra-ambient-energy__spark { opacity: 0.1; }
+}

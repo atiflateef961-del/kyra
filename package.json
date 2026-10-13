@@ -1,0 +1,22 @@
+{
+  "name": "kyra",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Kyra local-first computer control platform",
+  "scripts": {
+    "dev": "python scripts/dev.py",
+    "dev:lan": "python scripts/dev.py --lan",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "npm --prefix frontend run typecheck",
+    "lint": "npm --prefix frontend run lint"
+  },
+  "workspaces": [
+    "frontend"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "firebase": "^12.19.0"
+  }
+}

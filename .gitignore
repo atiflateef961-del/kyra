@@ -1,0 +1,36 @@
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+!.env.lan.example
+dev-certs/
+
+# JavaScript / Next.js
+node_modules/
+.next/
+out/
+dist/
+*.egg-info/
+coverage/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Local data, logs, and sensitive captures
+data/
+logs/
+*.log
+captures/
+recordings/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
